@@ -1,0 +1,51 @@
+CODIGO SQL AULA02:
+SITE: sqlfiddle.com
+=======================================================================
+create TABLE aluno (
+	RA int,
+  	nome varchar(80),
+  	fone varchar(30),
+  	pai varchar(80),
+  	mae varchar(80),
+  	data_nasc date
+)
+
+-- Comando para selecionar todos os registro de uma tabela:
+
+-- Comando para inserir(cadastrar) um registro na tabela:
+INSERT INTO aluno
+VALUES(102030, 'ANA', '16988775566', 'JOSE', 'MARIA', '2002/10/18')
+
+INSERT INTO aluno
+VALUES(708090, 'FELIPE', '4998321543', 'PEDRO', 'MARIA', '2016/10/23')
+
+INSERT INTO aluno
+VALUES(100200, 'GABRIEL', '5498328943', 'JULIO', 'ERIKA', '1994/07/15')
+
+INSERT INTO aluno
+VALUES(405060, 'MAURO JR', '17981215323', 'MAURO', 'JAQUELINE', '2000/12/30')
+
+-- Comando para acrescentar uma coluna nova á tabela:
+ALTER TABLE aluno
+	ADD email varchar(50);
+
+-- Comando para excluir uma coluna da tabela:
+ALTER TABLE aluno
+	DROP COLUMN pai
+    
+-- CUIDADO!!! Este comando precisa de um filtro para não afetar todas as linhas da tabela:
+UPDATE aluno SET email = 'contato@aluno.com.br'
+WHERE RA = 102030
+
+-- O comando WHERE pode ser usado para filtrar linhas da tabela junto com outros comandos. Ex:
+SELECT * From aluno
+WHERE mae <> 'ANA'
+
+-- Comando para excluir registros da tabela(apagar linhas):
+DELETE aluno
+WHERE RA = 708090
+
+
+-- Ordenar o resultado de uma consulta:
+SELECT * FROM aluno
+ORDER BY data_nasc DESC
