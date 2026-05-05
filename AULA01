@@ -1,0 +1,30 @@
+BAIXAR: SQL Server Express 2022 e SQL Management Studio
+    |--> SO TEM NO WINDOWS
+============================================================
+
+
+CODIGO SQL AULA01:
+
+-- comando para criar um novo BD:
+CREATE DATABASE Aula01
+
+
+-- Comando para "entrar" no BD que foi criado:
+USE Aula01
+
+-- Comando par acriar uma nova tabela
+--alunos(RA, nome, fone, data_nasc)
+
+CREATE TABLE alunos(
+RA int,
+nome varchar(80),
+fone varchar(30),
+data_nasc date
+)
+
+-- comando para consultar o conteudo da tabela:
+SELECT * FROM alunos
+
+-- cadastrar um novo registro na tabela criada:
+INSERT INTO alunos
+VALUES (123456, 'ANA', '8172497151', '1934/05/12')
