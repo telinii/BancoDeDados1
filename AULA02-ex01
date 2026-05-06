@@ -1,0 +1,92 @@
+Continuando com o codigo da AULA02, foram propostos os exercicios:
+  1. Cadastre três novos alunos chamados MATEUS, MARCOS e LUCAS.
+
+  2. Liste todos os dados dos alunos cadastrados na tabela.
+
+  3. Selecione o nome e o CPF dos alunos cujas mães se chamam “ANA”.
+
+  4. O aluno com RA 103 mudou o nome da mãe. Atualize para “Luciana Ferreira”.
+
+  5. O aluno com RA 1002 foi transferido. Remova esse aluno da tabela.
+
+  6. Liste todos os alunos ordenados em ordem alfabética (de A a Z).
+===============================================================================================
+
+create TABLE aluno (
+	RA int,
+  	nome varchar(80),
+  	fone varchar(30),
+  	pai varchar(80),
+  	mae varchar(80),
+  	data_nasc date,
+  	cpf varchar(11)
+)
+
+-- Comando para selecionar todos os registro de uma tabela:
+
+-- Comando para inserir(cadastrar) um registro na tabela:
+INSERT INTO aluno
+VALUES(102030, 'ANA', '16988775566', 'JOSE', 'MARIA', '2002/10/18', '11122233344')
+
+INSERT INTO aluno
+VALUES(708090, 'FELIPE', '4998321543', 'PEDRO', 'MARIA', '2016/10/23', '55566677788')
+
+INSERT INTO aluno
+VALUES(100200, 'GABRIEL', '5498328943', 'JULIO', 'ERIKA', '1994/07/15', '99900011112')
+
+INSERT INTO aluno
+VALUES(405060, 'MAURO JR', '17981215323', 'MAURO', 'JAQUELINE', '2000/12/30', '13314415516')
+
+INSERT INTO aluno
+VALUES(999999, 'MATEUS', '222888333', 'LEO', 'ANA', '1990/10/15', '17718819920')
+
+INSERT INTO aluno
+VALUES(1002, 'MARCOS', '333777444', 'JOAO', 'ANA', '2008/09/15', '21122223324')
+
+INSERT INTO aluno
+VALUES(103, 'LUCAS', '999000222', 'AFONSO', 'PAULA', '2015/08/30', '25526627728')
+
+-- Comando para acrescentar uma coluna nova á tabela:
+ALTER TABLE aluno
+	ADD email varchar(50);
+
+-- Comando para excluir uma coluna da tabela:
+ALTER TABLE aluno
+	DROP COLUMN pai
+    
+-- CUIDADO!!! Este comando precisa de um filtro para não afetar todas as linhas da tabela:
+UPDATE aluno SET email = 'contato@aluno.com.br'
+WHERE RA = 102030
+
+-- O comando WHERE pode ser usado para filtrar linhas da tabela junto com outros comandos. Ex:
+SELECT * From aluno
+WHERE mae <> 'ANA'
+
+-- Comando para excluir registros da tabela(apagar linhas):
+DELETE aluno
+WHERE RA = 708090
+
+
+-- Ordenar o resultado de uma consulta:
+SELECT * FROM aluno
+ORDER BY data_nasc DESC
+
+-- Mostrando o nome e cpf dos alunos que tem a mae chamada ANA
+SELECT nome,cpf FROM aluno
+WHERE mae = 'ANA'
+
+-- Atualizando o nome da mae do aluno com RA 103 para 'Luciana Ferreira'. Nao esquecer o WHERE
+UPDATE aluno SET mae = 'Luciana Ferreira'
+WHERE RA = 103
+
+-- Deletando o aluno com RA 1002
+DELETE aluno
+WHERE RA = 1002
+
+SELECT * FROM aluno
+
+-- Nomes em ordem alfabetica
+SELECT * FROM aluno
+ORDER BY nome ASC --ASC para o padrao ascendente e DESC para descendente
+
+SELECT * FROM aluno
