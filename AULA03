@@ -1,0 +1,35 @@
+codigo da aula03
+======================================================================
+
+create database EscolaTesta
+
+
+use EscolaTeste
+
+
+create TABLE alunos (
+	RA int,
+  	nome varchar(80),
+  	fone varchar(30),
+  	pai varchar(80),
+  	mae varchar(80),
+  	data_nasc date
+	)
+
+SELECT * FROM alunos
+-- CADASTRAR UM NOVO REGISTRO NA TABELA PREENCHENDO ALGUMAS COLUNAS
+
+INSERT into alunos (RA, pai, mae, nome)
+VALUES (102030, 'JOSE', 'CLARA', 'JOAO')
+
+ALTER TABLE alunos
+ADD naturalidade varchar(30)
+
+ALTER TABLE alunos
+ALTER COLUMN nome VARCHAR(80) NOT NULL
+
+
+-- INSERIR UM NOVO REGISTRO SEM PASSAR VALOR PARA CAMPO CADASTRADO
+INSERT INTO alunos(RA, mae)
+VALUES(203010, 'PAULA')
+
