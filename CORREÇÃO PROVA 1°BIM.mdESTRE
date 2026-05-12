@@ -1,0 +1,28 @@
+# CORREÇÃO DA PROVA DO PRIMEIRO BIMESTRE
+
+1.    CINEMA(CODIGO, lotacao, nomeFantasia)
+
+      SESSAO(CODIGO, data, horario, ID_CINEMA, ID_FILME)
+
+      FILME()
+
+      ATUACAO
+
+2.    PESSOA, CINEMA, ATOR, DIRETOR, FILME, SESSAO, ATUACAO
+
+3.    DIRETORES(CODDIR, codFilme, codDiretor, dataIN)
+        codFilme referencia Filme
+        codDiretor referencia Diretor
+
+4.    Atuacao
+
+
+5.    a) Mostra dados sem juncao, menos detalhamento
+      b) Tem juncao, mais detalhamento
+
+
+6.    Diagrama ER(PAssar para o arquivo a print) 
+      
+
+  
+
