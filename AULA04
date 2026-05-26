@@ -1,0 +1,96 @@
+CODIGO DA AULA 04 - TERMINAR OS EXERCICIOS
+===============================================
+
+
+--	trabalhando com chaves primarias(PK) e chaves estrangeiras(FK)
+	
+CREATE DATABASE vendas2026
+USE vendas2026
+
+
+-- CRAIR TABELA MARCA JA COM A CHAVE PRIMARIA:
+CREATE TABLE marca(
+	idMarca int PRIMARY KEY, --este comando torna o campo como PK
+	nome varchar(80),
+	situacao char(1),
+)
+
+INSERT INTO marca
+	VALUES(1, 'COCA-COLA', 'A')
+INSERT INTO marca
+	VALUES(2, 'PEPSI', 'A')
+INSERT INTO marca
+	VALUES (3, 'ANTARCTICA', 'I'),
+		   (4, 'FORS', 'A'),
+	       (5, 'ANTARCTICA', 'I')
+
+SELECT * FROM marca
+
+
+-- TESTANDO PROPRIEDADE DE 'NÃO NULO' DA PK:
+insert into marca(nome, situacao)
+values ('TESTE', 'A')
+
+--TESTANTO PROPRIEDADE DE 'VALOR UNICO' DA PK: RETORNA ERRO DE CADASTRO REPETIDO(MESMO ID DE UM REGISTRO JA EXISTENTE)
+INSERT INTO marca
+VALUES(1, 'NOVO TESTE', 'A')
+
+-- QUEM CRIOU A TABELA PRODUTO PODE APAGA-LA
+DROP TABLE produto
+
+
+--  CRIAR A TABELA PRODUTO COM PK MAS AINDA SEM FK
+CREATE TABLE produto(
+	idPro int PRIMARY KEY IDENTITY(1,1),
+	nome varchar(100),
+	preco money,
+	cor varchar(40),
+	idMarca int FOREIGN KEY REFERENCES marca(idMarca)
+)
+
+-- CADASTRAR PRODUTOS PARA TESTAR AUTONUMERAÇÃO DA PK:
+INSERT INTO produto(nome, preco)
+VALUES('COCA-COLA 340 ml', 8.94)
+
+-- testa integridade referencial da fk com update do registro:
+UPDATE produto SET idMarca = 20
+WHERE idPro = 1
+
+SELECT * FROM produto
+
+-- criar nova tabela com cadastro de fornecedores
+CREATE TABLE fornecedor(
+	ifFor int PRIMARY KEY IDENTITY(1,1),
+	razaoSocial varchar(80),
+	cnpj varchar(20)
+)
+
+-- ALTERAR A ESTRUTURA DA TABELA produto PARA UMA NOVA FK LIGANDO AO FORNECEDOR:
+ALTER TABLE produto
+	ADD idFor INT FOREIGN KEY REFERENCES fornecedor(idfor)
+
+
+/* EXERCICIOS DE FIXAÇÃO
+1. CADASTRE 3 PRODUTOS INFORMANDO SO O NOME E O PRECO
+2. CADASTRE 4 FORNECEDORES PREENCHENDO TODOS OS CAMPOS
+3. ALTERE O NOME DA MARCA 'SKOL' PARA 'LEVISSIMA'
+4. CADASTRE 2 PRODUTOS INFORMANDO TODOS OS CAMPOS DA TABELA
+5. ATUALIZE O CNPJ DO FORNECEDOR CUJO idFor é 3 PARA TER VALOR '123456789'
+6. ATUALIZE TODOS OS PRODUTOS QUE NAO TEM MARCA PARA TEREM ALGUM idMarca
+7. EXCLUA O PRODUTO DE CODIGO 2.
+8. EXCLUAR A MARCA DE CODIGO = 4.
+9. ACRESCENTE 10% A MAIS NO PRECO DOS PRODUTOS QUE TEM PRECOS MAIOR QUE ZERO
+10. EXCLUA (APAGUE) A TABELA FORNECEDOR
+
+*/
+-- 1)
+INSERT INTO produto(nome, preco)
+VALUES	('COCA-COLA 1L', 12.94),
+		('COCA-COLA 2L', 18.94),
+		('COCA-ZERO 2.5L', 20.94)
+--2)
+INSERT INTO fornecedor
+VALUES	(1, 'SPRITE', 555555555),
+		(2, 'GUARANA', 666666666),
+		(3, 'GUARAVITA', 777777777)
+--4)
