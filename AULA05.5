@@ -1,0 +1,122 @@
+ADVISE: FAZER OS EXERCICIOS DURANTE O FERIADO
+
+
+CREATE DATABASE SUS
+
+USE SUS
+
+CREATE TABLE medicos(
+	idMedico int PRIMARY KEY IDENTITY(1,1), --CHAVE PRIMARIA DE MEDICO
+	nome varchar(40),
+	idade int,
+	salario MONEY,
+	idEspecialidade int Foreign key references especialidades(idEspecialidade)
+
+
+)
+
+create table especialidades(
+	idEspecialidade int PRIMARY KEY IDENTITY(10,10),
+	nome varchar(80)
+
+
+)
+
+-- cadastro das especialidades
+INSERT INTO especialidades
+	values
+		('OTORRINO'),
+		('OBSTETRA'),
+		('PEDIATRA'),
+		('CARDIOLOGISTA'),
+		('DERMATOLOGISTA'),
+		('ORTOPEDISTA')
+
+INSERT INTO medicos
+VALUES
+	('JOAO', 48, 800, 10),
+	('JOSE', 35, 1200, 20),
+	('ANA', 47, 1400, 30),
+	('IVO', 51, 750, 10),
+	('SILVIO', NULL, 2550, 30),
+	('ADAO', 49, 1950, 40),
+	('EVA', 42, 800, NULL),
+	('JOANIA', 39, 1200, 30),
+	('AFONSO', NULL, 800, 30)
+
+INSERT INTO medicos (NOME,IDADE,SALARIO)
+VALUES
+	('KARINA', 40 , 750),
+	('CARLA', 41 , 1950)
+
+INSERT INTO medicos (NOME,SALARIO)
+VALUES
+	('RODOLFO', 1320)
+
+
+
+select * from especialidades
+
+select M.nome AS nomeMed, E.nome AS nomeEspec
+FROM
+	medicos AS M LEFT JOIN especialidades AS E
+	ON
+	M.idespecialidade = E.idespecialidade
+WHERE E.idEspecialidade IS NULL
+
+CREATE TABLE pacientes(
+Codpac INT PRIMARY KEY IDENTITY(1,1),
+nome varchar(80),
+fone varchar(30)
+)
+
+CREATE TABLE consultas(
+codCon INT PRIMARY KEY IDENTITY(1,1), --PK COM AUTONUMERAÇÃO
+dataCon DATE,
+codMed int FOREIGN KEY REFERENCES medicos(idMedico) NOT NULL, --CAMPO OBRIGATORIO
+CodPac int FOREIGN KEY REFERENCES pacientes(Codpac) NOT NULL, --CAMPO OBRIGATORIO
+)
+
+SELECT M.nome as nomeMedico, P.nome as nomePaciente
+FROM
+	medicos AS M INNER JOIN consultas AS C
+				ON M.idMedico = C.codMed
+				INNER JOIN pacientes AS P
+				ON P.codPac = C.codPac
+				INNER JOIN especialidades AS E
+				ON E.idEspecialidade = M.idEspecialidade
+WHERE
+	C.dataCon >= '2026/05/01' AND C.dataCon <= '2026/05/31'
+	AND e.nome = 'PEDIATRA'
+    
+-- EXS DE FIXAÇÃO
+/* 1) Cadastre 6 pacientes
+
+2) Cadastre 10 consultas para médicos e pacientes diversos
+
+3) Atualize o nome do Médico 'JOÃO' para 'JOÃO DA SILVA'
+
+4) A data da consulta número 3 é 15/maio/2026 (atualize essa informação)
+
+5) Exclua a primeira consulta cadastrada
+
+6) Liste os nomes dos médicos e a especialidade de cada um.
+
+7) Liste os médicos que não têm especialidades.
+
+8) Liste as consultas feitas pelo convêncio UNIMED no mês de abril.
+
+9) Liste os nomes dos pacientes e os convênios que usaram nas suas consultas.
+
+10) Liste os telefones dos pacientes que nunca consultaram.
+
+11) Liste os convênios das consultas feitas por ORTOPEDISTAS.
+
+12) Liste os nomes e fones dos pacientes atendidos por PEDIATRAS ou DERMATOLOGISTAS em abril/2026.
+
+13) Cadastre a especialidade 'NEUROLOGISTA' e atualize as especialidades de 2 médicos para esta nova.
+
+14) Crie 3 consultas para médicos NEUROLOGISTAS no mês de maio/2026.
+
+15) As consultas feitas pelos PEDIATRAS em abril/2026 devem se somente do convênio 'SUS'. Atualize essa informação.
+*/ 
