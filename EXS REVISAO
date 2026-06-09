@@ -1,0 +1,93 @@
+CREATE DATABASE Restaurante
+
+USE Restaurante
+
+--tabela de atendimentos
+CREATE TABLE ATENDIMENTO(
+CodAtendimento int PRIMARY KEY IDENTITY (1,1),
+Situacao varchar(80),
+DtHrChegada date,
+NroPessoas int,
+
+
+idGarcom int FOREIGN KEY REFERENCES GARCOM(CodGarcom),
+
+
+idMesa int FOREIGN KEY REFERENCES MESA(NroMesa)
+)
+
+ALTER TABLE ATENDIMENTO
+ADD CodGarsom int FOREIGN KEY REFERENCES GARCOM(CodGarsom)
+ALTER TABLE ATENDIMENTO
+ADD NroMesa int FOREIGN KEY REFERENCES MESA(NroMesa)
+
+
+
+--tabela de mesa
+CREATE TABLE MESA(
+NroMesa int PRIMARY KEY IDENTITY(1,1),
+Setor varchar(80),
+Capacidade int,
+Situacao varchar(80)
+)
+
+--tabela de produto
+CREATE TABLE PRODUTO(
+CodPro int PRIMARY KEY IDENTITY(1,1),
+Descricao varchar(80),
+Preco money
+)
+
+--tabela de garcom
+CREATE TABLE GARCOM(
+CodGarsom int PRIMARY KEY IDENTITY(1,1),
+Nome varchar (90),
+CalcularComissao money
+)
+
+CREATE TABLE CONSUMO(
+CodPro int FOREIGN KEY REFERENCES PRODUTO(CodPro),
+CodAtendimento int FOREIGN KEY REFERENCES ATENDIMENTO(CodAtendimento),
+Qtde int,
+Vlunit money
+)
+
+ALTER TABLE CONSUMO
+ADD idConsumo int
+
+
+-- EXERCICIOS
+--1 CADASTRAS 5 MESAS, 10 PRODUTOS, 5 GARCOMS, 10 ATENDIMENTOS E 15 PRODUTOS CONSUMIDOS
+INSERT INTO MESA
+VALUES('KIDS', 5 ,'DISPONIVEL'),
+	  ('BAR', 3 ,'RESERVADA'),
+INSERT INTO MESA
+VALUES('HALL', 4 ,'RESERVADA'),
+	  ('CENTRO', 10 ,'OCUPADA'),
+	  ('QUINA', 4 ,'DISPONIVEL')
+
+INSERT INTO PRODUTO
+VALUES ('PODRAO', 15),
+	   ('X-EGG', 8),
+	   ('OLAVO BILAC', 10),
+	   ('CHORIPAN', 18),
+	   ('COCA', 2),
+	   ('REDBULL', 6),
+	   ('GUARANA', 1),
+	   ('SPRITE', 3),
+	   ('DORITOS', 5),
+	   ('TEMAKI', 20)
+
+-- CONTINUAR O EXERCICIO 1- PAREI AQUI
+INSERT INTO ATENDIMENTO
+VALUES ()
+
+
+
+
+-- SELECTS PARA FINS DE CONFERENCIA
+SELECT * FROM GARCOM
+SELECT * FROM ATENDIMENTO
+SELECT * FROM PRODUTO
+SELECT * FROM CONSUMO
+SELECT * FROM MESA
